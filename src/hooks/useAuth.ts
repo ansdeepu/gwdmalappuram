@@ -114,24 +114,25 @@ export function useAuth() {
                 lastActiveAt: userData.lastActiveAt instanceof Timestamp ? userData.lastActiveAt.toDate() : undefined,
             };
         } else if (isAdminByEmail) {
-            // This logic creates the admin user document if it doesn't exist.
-            const newAdminProfile = {
-                uid: firebaseUser.uid,
+            const newAdminProfileData = {
                 email: firebaseUser.email,
                 name: firebaseUser.email?.split('@')[0],
                 role: 'editor' as UserRole,
                 isApproved: true,
-                createdAt: new Date(),
+                createdAt: serverTimestamp(),
+                lastActiveAt: serverTimestamp()
             };
-            await setDoc(doc(db, "users", firebaseUser.uid), {
-                email: newAdminProfile.email,
-                name: newAdminProfile.name,
-                role: 'editor',
-                isApproved: true,
-                createdAt: Timestamp.now(),
-            });
-            // This is the critical fix: ensure the just-created profile is used immediately.
-            userProfile = newAdminProfile; 
+            await setDoc(userDocRef, newAdminProfileData);
+            
+            userProfile = {
+                uid: firebaseUser.uid,
+                email: newAdminProfileData.email,
+                name: newAdminProfileData.name,
+                role: newAdminProfileData.role,
+                isApproved: newAdminProfileData.isApproved,
+                createdAt: new Date(),
+                lastActiveAt: new Date(),
+            };
         }
         
         if (!isMounted) return;
@@ -142,7 +143,7 @@ export function useAuth() {
              if (auth.currentUser) {
                 try { await signOut(auth); } catch (signOutError) { console.error('[Auth] Error signing out during auth state check:', signOutError); }
             }
-            setAuthState({ isAuthenticated: false, isLoading: false, user: userProfile, firebaseUser: null });
+            setAuthState({ isAuthenticated: false, isLoading: false, user: null, firebaseUser: null });
             
             if (userProfile && !userProfile.isApproved) {
                 toast({
