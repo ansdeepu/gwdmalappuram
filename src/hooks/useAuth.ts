@@ -1,3 +1,4 @@
+
 // src/hooks/useAuth.ts
 "use client";
 
@@ -368,7 +369,7 @@ export function useAuth() {
         if (!fileSnapshot.empty) {
             toast({
                 title: "Supervisor Un-assigned",
-                description: `${userName} was removed from their ongoing projects. Check 'Pending Updates' to re-assign.`,
+                description: `${userName} was removed from their ongoing projects. Check 'Pending Actions' to re-assign.`,
                 duration: 7000
             });
         }
