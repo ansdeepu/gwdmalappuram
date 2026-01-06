@@ -39,11 +39,14 @@ service cloud.firestore {
     }
 
     // === User Profiles ===
-    // Editors/Viewers can see all profiles.
-    // An authenticated user can read their own profile.
     match /users/{userId} {
+      // Allow a user to read their own profile, or allow editors/viewers to read all profiles.
       allow read: if canReadCollection() || request.auth.uid == userId;
-      allow write: if isEditor();
+      
+      // Allow a user to create their own profile document.
+      // After creation, only editors can write/update profiles.
+      allow create: if request.auth.uid == userId;
+      allow update, delete: if isEditor();
     }
 
     // === Main File Entries (Deposit Works) ===
