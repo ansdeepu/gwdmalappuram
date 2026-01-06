@@ -116,14 +116,22 @@ export function useAuth() {
             };
         } else if (isAdminByEmail) {
             // This logic creates the admin user document if it doesn't exist.
-            userProfile = {
-                uid: firebaseUser.uid, email: firebaseUser.email, name: firebaseUser.email?.split('@')[0],
-                role: 'editor', isApproved: true,
+            const newAdminProfile = {
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+                name: firebaseUser.email?.split('@')[0],
+                role: 'editor' as UserRole,
+                isApproved: true,
                 createdAt: new Date(),
             };
             await setDoc(doc(db, "users", firebaseUser.uid), {
-                email: firebaseUser.email, name: userProfile.name, role: 'editor', isApproved: true, createdAt: Timestamp.now(),
+                email: newAdminProfile.email,
+                name: newAdminProfile.name,
+                role: 'editor',
+                isApproved: true,
+                createdAt: Timestamp.now(),
             });
+            userProfile = newAdminProfile; // Critically, set userProfile after creation
         }
         
         if (!isMounted) return;
