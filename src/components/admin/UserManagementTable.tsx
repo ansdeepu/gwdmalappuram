@@ -41,7 +41,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const ADMIN_EMAIL_FOR_TABLE = 'gwdklm@gmail.com';
+const ADMIN_EMAIL_FOR_TABLE = 'gwdmpm002@gmail.com';
 
 const hashCode = (str: string): number => {
     let hash = 0;
