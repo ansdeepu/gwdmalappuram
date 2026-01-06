@@ -86,7 +86,7 @@ export default function LoginForm() {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="user@gwdkollam.com"
+                      placeholder="user@gwdmalappuram.com"
                       {...field}
                     />
                   </FormControl>
