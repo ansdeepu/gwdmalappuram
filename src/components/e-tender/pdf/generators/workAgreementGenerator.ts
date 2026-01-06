@@ -75,7 +75,7 @@ export async function generateWorkAgreement(tender: E_tender, allStaffMembers?: 
     // 2. Draw the main agreement paragraph below the heading
     currentY -= (2 * paragraphLineHeight); // Two lines of space after heading
     const paragraphIndent = "     ";
-    const paragraphText = `Agreement executed on ${agreementDateFormatted} between the District Officer, Groundwater Department, Kollam, for and on behalf of the Governor of Kerala, on the first part, and ${bidderDetails}, on the other part, for the ${workName}. The second party agrees to execute the work at the sanctioned rate as per the approved tender schedule and to complete the same within ${completionPeriod} days from the date of receipt of the work order, in accordance with the contract conditions approved by the District Officer, Groundwater Department, Kollam.`;
+    const paragraphText = `Agreement executed on ${agreementDateFormatted} between the District Officer, Groundwater Department, Malappuram, for and on behalf of the Governor of Kerala, on the first part, and ${bidderDetails}, on the other part, for the ${workName}. The second party agrees to execute the work at the sanctioned rate as per the approved tender schedule and to complete the same within ${completionPeriod} days from the date of receipt of the work order, in accordance with the contract conditions approved by the District Officer, Groundwater Department, Malappuram.`;
 
     const words = paragraphText.split(' ');
     const lines = [];
@@ -113,6 +113,7 @@ export async function generateWorkAgreement(tender: E_tender, allStaffMembers?: 
 
         let xOffset = leftMargin;
         if (line.startsWith(paragraphIndent)) {
+            page.drawText(paragraphIndent, { x: leftMargin, y: currentY, font: timesRomanFont, size: regularFontSize });
             xOffset += timesRomanFont.widthOfTextAtSize(paragraphIndent, regularFontSize);
         }
 
@@ -142,8 +143,6 @@ export async function generateWorkAgreement(tender: E_tender, allStaffMembers?: 
       lineHeight: paragraphLineHeight,
       color: rgb(0, 0, 0),
     });
-    
-    // Intentionally removed the "District Officer" text block that was here.
 
     return await pdfDoc.save();
 }

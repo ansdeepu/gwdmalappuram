@@ -8,12 +8,12 @@ import { getStorage, type FirebaseStorage } from 'firebase/storage';
 // These environment variables need to be set in your .env file.
 // You can find these values in your Firebase project settings.
 const firebaseConfig = {
-  apiKey: "AIzaSyAdBken5JDPnPsI5jZs38UwGRmQym9jsGY",
-  authDomain: "gwd-kollam-dashboard.firebaseapp.com",
-  projectId: "gwd-kollam-dashboard",
-  storageBucket: "gwd-kollam-dashboard.firebasestorage.app",
-  messagingSenderId: "873479268293",
-  appId: "1:873479268293:web:8656fe9e8e62226e024dac"
+  apiKey: "AIzaSyD-wjc-hCFo_N7l5CsrYx8seL7yZu19xe8",
+  authDomain: "gwd-malappuram.firebaseapp.com",
+  projectId: "gwd-malappuram",
+  storageBucket: "gwd-malappuram.appspot.com",
+  messagingSenderId: "164289161362",
+  appId: "1:164289161362:web:f4855e5f8aa1ae8ecb5e4b"
 };
 
 // Initialize Firebase

@@ -1,4 +1,3 @@
-
 // src/hooks/useAuth.ts
 "use client";
 
@@ -24,7 +23,7 @@ import { useToast } from "@/hooks/use-toast";
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const ADMIN_EMAIL = 'gwdklm@gmail.com';
+const ADMIN_EMAIL = 'gwdmpm002@gmail.com';
 
 export interface UserProfile {
   uid: string;
@@ -139,7 +138,7 @@ export function useAuth() {
             if (userProfile && !userProfile.isApproved) {
                 toast({
                     title: "Account Pending Approval",
-                    description: "Your account is not yet approved by an administrator. Please contact 8547650853 for activation.",
+                    description: "Your account is not yet approved by an administrator. Please contact an administrator for activation.",
                     variant: "destructive",
                     duration: 8000
                 });

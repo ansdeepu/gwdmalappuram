@@ -44,8 +44,8 @@ export default function LoginPage() {
           {/* Left Column: Branding */}
           <div className="flex w-full flex-col items-center text-center md:w-1/2 md:items-start md:text-left">
             <Image
-              src="https://placehold.co/120x120/2563EB/FFFFFF.png?text=GWD%0AKOLLAM&font=lato&fontWeight=900&font-size=24"
-              alt="GWD Kollam Logo"
+              src="https://placehold.co/120x120/2563EB/FFFFFF.png?text=GWD%0AMALAPPURAM&font=lato&fontWeight=900&font-size=20"
+              alt="GWD Malappuram Logo"
               width={100}
               height={100}
               className="mb-6 rounded-lg shadow-md"
@@ -53,7 +53,7 @@ export default function LoginPage() {
               priority
             />
             <h1 className="mb-3 text-3xl font-bold tracking-tight text-primary md:text-4xl">
-              GWD Kollam Dashboard
+              GWD Malappuram Dashboard
             </h1>
             <p className="mb-6 text-muted-foreground md:text-lg">
               Efficiently manage and monitor ground water resources.

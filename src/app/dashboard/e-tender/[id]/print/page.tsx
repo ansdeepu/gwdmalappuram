@@ -27,7 +27,7 @@ export default function TenderPrintPage() {
                 </div>
                 
                 <p className="text-sm leading-relaxed mb-4 text-justify">
-                    The Executive Engineer, Ground Water Department, Kollam, for and on behalf of the Governor of Kerala invites online tenders from registered bidders of the Ground Water Department for the work specified below.
+                    The Executive Engineer, Ground Water Department, Malappuram, for and on behalf of the Governor of Kerala invites online tenders from registered bidders of the Ground Water Department for the work specified below.
                 </p>
 
                 <table className="w-full border-collapse border border-black text-sm mb-6">

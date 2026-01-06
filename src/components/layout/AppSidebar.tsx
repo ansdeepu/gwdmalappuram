@@ -1,4 +1,3 @@
-
 // src/components/layout/AppSidebar.tsx
 "use client";
 
@@ -98,7 +97,7 @@ export default function AppSidebar() {
             data-ai-hint="logo abstract"
           />
           <span className="font-semibold text-lg text-sidebar-foreground group-data-[collapsible=icon]:hidden">
-            GWD Kollam
+            GWD Malappuram
           </span>
         </Link>
       </SidebarHeader>

@@ -1,4 +1,3 @@
-
 // src/components/e-tender/pdf/generators/retenderCorrigendumGenerator.ts
 import { PDFDocument, PDFTextField, StandardFonts, TextAlignment, rgb } from 'pdf-lib';
 import type { E_tender } from '@/hooks/useE_tenders';
