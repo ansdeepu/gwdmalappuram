@@ -85,10 +85,43 @@ export function useAuth() {
         let userProfile: UserProfile | null = null;
         const isAdminByEmail = firebaseUser.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
-        if (userDocSnap.exists()) {
+        if (isAdminByEmail) {
+            // This is the admin user, handle their profile specifically
+            if (userDocSnap.exists()) {
+                const userData = userDocSnap.data();
+                userProfile = {
+                    uid: firebaseUser.uid,
+                    email: firebaseUser.email,
+                    name: userData.name || firebaseUser.email?.split('@')[0],
+                    role: 'editor',
+                    isApproved: true,
+                    createdAt: userData.createdAt instanceof Timestamp ? userData.createdAt.toDate() : new Date(),
+                    lastActiveAt: userData.lastActiveAt instanceof Timestamp ? userData.lastActiveAt.toDate() : undefined,
+                };
+            } else {
+                // Admin user document doesn't exist, create it.
+                const newAdminProfileData = {
+                    email: firebaseUser.email,
+                    name: firebaseUser.email?.split('@')[0],
+                    role: 'editor' as UserRole,
+                    isApproved: true,
+                    createdAt: serverTimestamp(),
+                    lastActiveAt: serverTimestamp()
+                };
+                await setDoc(userDocRef, newAdminProfileData);
+                userProfile = {
+                    uid: firebaseUser.uid,
+                    email: newAdminProfileData.email,
+                    name: newAdminProfileData.name,
+                    role: newAdminProfileData.role,
+                    isApproved: newAdminProfileData.isApproved,
+                    createdAt: new Date(),
+                    lastActiveAt: new Date(),
+                };
+            }
+        } else if (userDocSnap.exists()) {
+            // This is a non-admin user, process their existing profile
             const userData = userDocSnap.data();
-            const isApproved = isAdminByEmail || userData.isApproved === true;
-
             let staffInfo: { designation?: Designation } = {};
             if (userData.staffId) {
                 try {
@@ -106,32 +139,12 @@ export function useAuth() {
                 uid: firebaseUser.uid,
                 email: firebaseUser.email,
                 name: userData.name ? String(userData.name) : undefined,
-                role: isAdminByEmail ? 'editor' : (userData.role || 'viewer'),
-                isApproved: isApproved,
+                role: userData.role || 'viewer',
+                isApproved: userData.isApproved === true,
                 staffId: userData.staffId || undefined,
                 designation: staffInfo.designation,
                 createdAt: userData.createdAt instanceof Timestamp ? userData.createdAt.toDate() : new Date(),
                 lastActiveAt: userData.lastActiveAt instanceof Timestamp ? userData.lastActiveAt.toDate() : undefined,
-            };
-        } else if (isAdminByEmail) {
-            const newAdminProfileData = {
-                email: firebaseUser.email,
-                name: firebaseUser.email?.split('@')[0],
-                role: 'editor' as UserRole,
-                isApproved: true,
-                createdAt: serverTimestamp(),
-                lastActiveAt: serverTimestamp()
-            };
-            await setDoc(userDocRef, newAdminProfileData);
-            
-            userProfile = {
-                uid: firebaseUser.uid,
-                email: newAdminProfileData.email,
-                name: newAdminProfileData.name,
-                role: newAdminProfileData.role,
-                isApproved: newAdminProfileData.isApproved,
-                createdAt: new Date(),
-                lastActiveAt: new Date(),
             };
         }
         
@@ -153,6 +166,7 @@ export function useAuth() {
                     duration: 8000
                 });
             } else if (!userProfile) {
+                // This case handles non-admin users who don't have a profile doc
                 toast({
                     title: "User Profile Not Found",
                     description: "Your account credentials are valid, but your user profile could not be found. Please contact an administrator.",
