@@ -44,7 +44,7 @@ export default function LoginPage() {
           {/* Left Column: Branding */}
           <div className="flex w-full flex-col items-center text-center md:w-1/2 md:items-start md:text-left">
             <Image
-              src="https://placehold.co/160x100/2563EB/FFFFFF.png?text=GWD%0AMALAPPURAM&font=lato&fontWeight=900&font-size=24"
+              src="https://placehold.co/160x100/2563EB/FFFFFF.png?text=GWD%0AMALAPPURAM&font=lato&fontWeight=900&font-size=28"
               alt="GWD Malappuram Logo"
               width={160}
               height={100}
