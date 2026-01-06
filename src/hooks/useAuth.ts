@@ -1,4 +1,3 @@
-
 // src/hooks/useAuth.ts
 "use client";
 
@@ -131,7 +130,8 @@ export function useAuth() {
                 isApproved: true,
                 createdAt: Timestamp.now(),
             });
-            userProfile = newAdminProfile; // Critically, set userProfile after creation
+            // This is the critical fix: ensure the just-created profile is used immediately.
+            userProfile = newAdminProfile; 
         }
         
         if (!isMounted) return;
