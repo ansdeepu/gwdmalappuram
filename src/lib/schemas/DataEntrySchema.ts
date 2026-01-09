@@ -60,19 +60,10 @@ export const applicationTypeDisplayMap = Object.fromEntries(
 ) as Record<ApplicationType, string>;
 
 export const constituencyOptions = [
-    "Chadayamangalam",
-    "Chathannoor",
-    "Chavara",
-    "Eravipuram",
-    "Kollam",
-    "Kottarakkara",
-    "Kundara",
-    "Kunnathur",
-    "Karunagappally",
-    "Pathanapuram",
-    "Punalur"
+    // This list is now managed dynamically. The schema will allow any string.
+    // The dropdown in the UI will provide the valid options from the database.
 ] as const;
-export type Constituency = typeof constituencyOptions[number];
+export type Constituency = string; // Allow any string
 
 
 export const remittedAccountOptions = [
@@ -233,7 +224,7 @@ const FINAL_WORK_STATUSES: SiteWorkStatus[] = ['Work Failed', 'Work Completed'];
 export const SiteDetailSchema = z.object({
   nameOfSite: z.string().min(1, "Name of Site is required."),
   localSelfGovt: z.string().optional(),
-  constituency: z.preprocess((val) => (val === "" || val === null ? undefined : val), z.enum(constituencyOptions).optional()),
+  constituency: z.preprocess((val) => (val === "" || val === null ? undefined : val), z.string().optional()),
   latitude: optionalNumber("Latitude must be a valid number."),
   longitude: optionalNumber("Longitude must be a valid number."),
   purpose: z.enum(sitePurposeOptions, { required_error: "Purpose is required." }).optional(),
@@ -328,7 +319,7 @@ export const DataEntrySchema = z.object({
   phoneNo: z.string().optional(),
   secondaryMobileNo: z.string().optional(),
   applicationType: z.enum(applicationTypeOptions).optional(),
-  constituency: z.preprocess((val) => (val === "" || val === null ? undefined : val), z.enum(constituencyOptions).optional()),
+  constituency: z.preprocess((val) => (val === "" || val === null ? undefined : val), z.string().optional()),
   estimateAmount: optionalNumber("Estimate Amount must be a valid number."),
   assignedSupervisorUids: z.array(z.string()).optional(),
 
