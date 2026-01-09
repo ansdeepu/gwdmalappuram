@@ -1,3 +1,4 @@
+
 // src/lib/schemas.ts
 import { z } from 'zod';
 import { format, parse, isValid } from 'date-fns';
@@ -77,6 +78,8 @@ export const designationOptions = [
     "Junior Geophysicist",
     "Master Driller",
     "Senior Driller",
+    "Geological Assistant",
+    "Geophysical Assistant",
     "Driller",
     "Driller Mechanic",
     "Drilling Assistant",
@@ -84,6 +87,7 @@ export const designationOptions = [
     "Pump Operator",
     "Driver, HDV",
     "Driver, LDV",
+    "Clerk",
     "Senior Clerk",
     "L D Typist",
     "U D Typist",
@@ -105,6 +109,8 @@ export const designationMalayalamOptions = [
     "ജൂനിയർ ജിയോഫിസിസ്റ്റ്",
     "മാസ്റ്റർ ഡ്രില്ലർ",
     "സീനിയർ ഡ്രില്ലർ",
+    "ജിയോളജിക്കൽ അസിസ്റ്റന്റ്",
+    "ജിയോഫിസിക്കൽ അസിസ്റ്റന്റ്",
     "ഡ്രില്ലർ",
     "ഡ്രില്ലർ മെക്കാനിക്ക്",
     "ഡ്രില്ലിംഗ് അസിസ്റ്റന്റ്",
@@ -112,6 +118,7 @@ export const designationMalayalamOptions = [
     "പമ്പ് ഓപ്പറേറ്റർ",
     "ഡ്രൈവർ, എച്ച്ഡിവി",
     "ഡ്രൈവർ, എൽഡിവി",
+    "ക്ലർക്ക്",
     "സീനിയർ ക്ലർക്ക്",
     "എൽ.ഡി ടൈപ്പിസ്റ്റ്",
     "യു.ഡി ടൈപ്പിസ്റ്റ്",
