@@ -67,7 +67,7 @@ export type Constituency = string; // Allow any string
 
 
 export const remittedAccountOptions = [
-  "SBI",
+  "Bank",
   "STSB",
   "Revenue Head",
   "Plan Fund",
@@ -97,7 +97,7 @@ export type RemittanceDetailFormData = z.infer<typeof RemittanceDetailSchema>;
 
 
 export const paymentAccountOptions = [
-  "SBI",
+  "Bank",
   "STSB",
   "Plan Fund",
 ] as const;
