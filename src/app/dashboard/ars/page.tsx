@@ -20,8 +20,8 @@ import Link from 'next/link';
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { usePageHeader } from "@/hooks/usePageHeader";
-import type { ArsEntryFormData, SiteWorkStatus } from "@/lib/schemas";
-import { arsTypeOfSchemeOptions, constituencyOptions, arsWorkStatusOptions } from "@/lib/schemas";
+import type { ArsEntryFormData, SiteWorkStatus, Constituency } from "@/lib/schemas";
+import { arsTypeOfSchemeOptions, arsWorkStatusOptions } from "@/lib/schemas";
 import { usePageNavigation } from "@/hooks/usePageNavigation";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -56,7 +56,7 @@ const XCircle = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
 );
 const CalendarIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
 );
 const ShieldAlert = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
@@ -140,6 +140,7 @@ export default function ArsPage() {
   }, [setHeader]);
   
   const { arsEntries, isLoading: entriesLoading, refreshArsEntries, deleteArsEntry, clearAllArsData, addArsEntry } = useArsEntries();
+  const { allLsgConstituencyMaps } = useDataStore();
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
   const { user, isLoading: authLoading } = useAuth();
@@ -182,6 +183,15 @@ export default function ArsPage() {
     const pageParam = currentPage > 1 ? `?page=${currentPage}` : '';
     router.push(`/dashboard/ars/entry?id=${siteId}${pageParam ? `&${pageParam.substring(1)}` : ''}`);
   };
+
+  const dynamicConstituencyOptions = useMemo(() => {
+    const allOptions = new Set<string>();
+    allLsgConstituencyMaps.forEach(map => {
+        map.constituencies.forEach(c => allOptions.add(c));
+    });
+    return Array.from(allOptions).sort((a,b) => a.localeCompare(b));
+  }, [allLsgConstituencyMaps]);
+
 
   const { filteredSites, lastCreatedDate } = useMemo(() => {
     let sites: ArsEntry[] = [...arsEntries];
@@ -357,7 +367,7 @@ export default function ArsPage() {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("ARSReport");
 
-    worksheet.addRow(["Ground Water Department, Kollam"]).commit();
+    worksheet.addRow(["Ground Water Department, Malappuram"]).commit();
     worksheet.addRow([reportTitle]).commit();
     worksheet.addRow([`Report generated on: ${format(new Date(), 'dd/MM/yyyy HH:mm')}`]).commit();
     worksheet.addRow([]).commit(); // Spacer
@@ -415,7 +425,7 @@ export default function ArsPage() {
   }, [filteredSites, toast]);
 
   const handleDownloadTemplate = async () => {
-    const templateData = [ { "File No": "Example/123", "Name of Site": "Sample ARS Site", "Constituency": "Kollam", "Type of Scheme": "Check Dam", "Local Self Govt.": "Sample Panchayath", "Block": "Sample Block", "Latitude": 8.8932, "Longitude": 76.6141, "Number of Structures": 1, "Storage Capacity (m3)": 500, "No. of Fillings": 2, "Estimate Amount": 500000, "AS/TS Accorded Details": "GO(Rt) No.123/2023/WRD", "AS/TS Amount": 450000, "Sanctioned Date": "15/01/2023", "Tendered Amount": 445000, "Awarded Amount": 440000, "Present Status": "Work in Progress", "Completion Date": "", "Expenditure (₹)": 200000, "No. of Beneficiaries": "50 families", "Remarks": "Work ongoing", } ];
+    const templateData = [ { "File No": "Example/123", "Name of Site": "Sample ARS Site", "Constituency": "Malappuram", "Type of Scheme": "Check Dam", "Local Self Govt.": "Sample Panchayath", "Block": "Sample Block", "Latitude": 8.8932, "Longitude": 76.6141, "Number of Structures": 1, "Storage Capacity (m3)": 500, "No. of Fillings": 2, "Estimate Amount": 500000, "AS/TS Accorded Details": "GO(Rt) No.123/2023/WRD", "AS/TS Amount": 450000, "Sanctioned Date": "15/01/2023", "Tendered Amount": 445000, "Awarded Amount": 440000, "Present Status": "Work in Progress", "Completion Date": "", "Expenditure (₹)": 200000, "No. of Beneficiaries": "50 families", "Remarks": "Work ongoing", } ];
     const headers = Object.keys(templateData[0]);
 
     const workbook = new ExcelJS.Workbook();
@@ -611,7 +621,7 @@ export default function ArsPage() {
                       </SelectTrigger>
                       <SelectContent>
                           <SelectItem value="all">All Constituencies</SelectItem>
-                          {[...constituencyOptions].sort((a,b) => a.localeCompare(b)).map((constituency) => (
+                          {dynamicConstituencyOptions.map((constituency) => (
                           <SelectItem key={constituency} value={constituency}>{constituency}</SelectItem>
                           ))}
                       </SelectContent>
