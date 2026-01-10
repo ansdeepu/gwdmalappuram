@@ -15,25 +15,25 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '../ui/scroll-area';
 
 const Loader2 = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
 );
 const RefreshCw = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
 );
 const XCircle = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
 );
 const Landmark = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
 );
 const TrendingUp = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
 );
 const TrendingDown = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
 );
 const Wallet = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
 );
 const CalendarIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
@@ -110,7 +110,7 @@ export default function FinanceOverview({ allFileEntries, onOpenDialog, dates, o
                 const isInPeriod = !isDateFilterActive || (remittedDate && isValid(remittedDate) && sDate && eDate && isWithinInterval(remittedDate, { start: sDate, end: eDate }));
                 if (isInPeriod) {
                     const amount = Number(rd.amountRemitted) || 0;
-                    if (rd.remittedAccount === 'SBI') sbiCredit += amount;
+                    if (rd.remittedAccount === 'Bank') sbiCredit += amount;
                     else if (rd.remittedAccount === 'STSB') stsbCredit += amount;
                 }
             });
@@ -119,7 +119,7 @@ export default function FinanceOverview({ allFileEntries, onOpenDialog, dates, o
                 const isInPeriod = !isDateFilterActive || (paymentDate && isValid(paymentDate) && sDate && eDate && isWithinInterval(paymentDate, { start: sDate, end: eDate }));
                 if (isInPeriod) {
                     const currentPaymentDebitAmount = (Number(pd.contractorsPayment) || 0) + (Number(pd.gst) || 0) + (Number(pd.incomeTax) || 0) + (Number(pd.kbcwb) || 0) + (Number(pd.refundToParty) || 0);
-                    if (pd.paymentAccount === 'SBI') sbiDebit += currentPaymentDebitAmount;
+                    if (pd.paymentAccount === 'Bank') sbiDebit += currentPaymentDebitAmount;
                     else if (pd.paymentAccount === 'STSB') stsbDebit += currentPaymentDebitAmount;
                 }
             });
@@ -183,7 +183,7 @@ export default function FinanceOverview({ allFileEntries, onOpenDialog, dates, o
         onSetDates({ start: undefined, end: undefined });
     };
     
-    const handleAmountClick = (account: 'SBI' | 'STSB' | 'RevenueHead' | 'PlanFund' | 'CollectorFund', type: 'credit' | 'debit' | 'expenditure') => {
+    const handleAmountClick = (account: 'Bank' | 'STSB' | 'RevenueHead' | 'PlanFund' | 'CollectorFund', type: 'credit' | 'debit' | 'expenditure') => {
         let title = '';
         const dataForDialog: Array<Record<string, any>> = [];
         let columnsForDialog: Array<{ key: string; label: string; isNumeric?: boolean; }> = [];
@@ -227,7 +227,7 @@ export default function FinanceOverview({ allFileEntries, onOpenDialog, dates, o
 
           if ((account === 'PlanFund' || account === 'CollectorFund') && type === 'credit') {
             processCredit(account);
-          } else if ((account === 'SBI' || account === 'STSB') && type === 'credit') {
+          } else if ((account === 'Bank' || account === 'STSB') && type === 'credit') {
             title = `${account} - Credit Details`;
             columnsForDialog = [
               { key: 'slNo', label: 'Sl. No.' }, { key: 'fileNo', label: 'File No.' }, { key: 'applicantName', label: 'Applicant Name' },
@@ -243,7 +243,7 @@ export default function FinanceOverview({ allFileEntries, onOpenDialog, dates, o
                 });
               }
             });
-          } else if ((account === 'SBI' || account === 'STSB') && type === 'debit') {
+          } else if ((account === 'Bank' || account === 'STSB') && type === 'debit') {
             title = `${account} - Withdrawal Details`;
             columnsForDialog = [
               { key: 'slNo', label: 'Sl. No.' }, { key: 'fileNo', label: 'File No.' }, { key: 'applicantName', label: 'Applicant Name' },
@@ -352,9 +352,9 @@ export default function FinanceOverview({ allFileEntries, onOpenDialog, dates, o
                                     </TableHeader>
                                     <TableBody>
                                         <TableRow>
-                                            <TableCell className="font-medium">SBI</TableCell>
-                                            <TableCell className="text-right font-mono font-bold"><Button variant="link" className="text-green-600 p-0 h-auto font-bold" onClick={() => handleAmountClick('SBI', 'credit')} disabled={!transformedFinanceMetrics.sbiCredit}>{transformedFinanceMetrics.sbiCredit.toLocaleString('en-IN')}</Button></TableCell>
-                                            <TableCell className="text-right font-mono font-bold"><Button variant="link" className="text-red-600 p-0 h-auto font-bold" onClick={() => handleAmountClick('SBI', 'debit')} disabled={!transformedFinanceMetrics.sbiDebit}>{transformedFinanceMetrics.sbiDebit.toLocaleString('en-IN')}</Button></TableCell>
+                                            <TableCell className="font-medium">Bank</TableCell>
+                                            <TableCell className="text-right font-mono font-bold"><Button variant="link" className="text-green-600 p-0 h-auto font-bold" onClick={() => handleAmountClick('Bank', 'credit')} disabled={!transformedFinanceMetrics.sbiCredit}>{transformedFinanceMetrics.sbiCredit.toLocaleString('en-IN')}</Button></TableCell>
+                                            <TableCell className="text-right font-mono font-bold"><Button variant="link" className="text-red-600 p-0 h-auto font-bold" onClick={() => handleAmountClick('Bank', 'debit')} disabled={!transformedFinanceMetrics.sbiDebit}>{transformedFinanceMetrics.sbiDebit.toLocaleString('en-IN')}</Button></TableCell>
                                             <TableCell className="text-right font-mono font-bold">{transformedFinanceMetrics.sbiBalance.toLocaleString('en-IN')}</TableCell>
                                         </TableRow>
                                         <TableRow>
