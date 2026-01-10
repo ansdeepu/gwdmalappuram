@@ -7,10 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { DataEntryFormData, SitePurpose, Constituency, SiteDetailFormData, SiteWorkStatus } from '@/lib/schemas';
-import { constituencyOptions, sitePurposeOptions } from '@/lib/schemas';
-import { cn } from '@/lib/utils';
+import { sitePurposeOptions } from '@/lib/schemas';
+import { cn } from "@/lib/utils";
 import { format, parse, startOfDay, endOfDay, isWithinInterval, isValid } from 'date-fns';
 import { ScrollArea } from '../ui/scroll-area';
+import { useDataStore } from '@/hooks/use-data-store';
 
 // Inline SVG components to remove lucide-react dependency
 const MapPin = (props: React.SVGProps<SVGSVGElement>) => (
@@ -99,6 +100,15 @@ const getColorClass = (name: string): string => {
 };
 
 export default function ConstituencyWiseOverview({ allWorks, depositWorksCount, collectorWorksCount, planFundWorksCount, arsWorksCount, totalCompletedCount, onOpenDialog, dates, onSetDates }: ConstituencyWiseOverviewProps) {
+  const { allLsgConstituencyMaps } = useDataStore();
+
+  const dynamicConstituencyOptions = useMemo(() => {
+    const allOptions = new Set<string>();
+    allLsgConstituencyMaps.forEach(map => {
+        map.constituencies.forEach(c => allOptions.add(c));
+    });
+    return Array.from(allOptions).sort();
+  }, [allLsgConstituencyMaps]);
 
   const { summaryData, totalCategorizedWorks } = React.useMemo(() => {
     const sDate = dates.start ? startOfDay(dates.start) : null;
@@ -121,7 +131,7 @@ export default function ConstituencyWiseOverview({ allWorks, depositWorksCount, 
       ...acc, [purpose]: { count: 0, data: [], expenditure: 0 }
     }), {} as Record<string, { count: number; data: any[]; expenditure: number }>);
 
-    const constituencyData = constituencyOptions.reduce((acc, constituency) => ({
+    const constituencyData = dynamicConstituencyOptions.reduce((acc, constituency) => ({
       ...acc,
       [constituency]: {
         totalCount: 0,
@@ -144,7 +154,7 @@ export default function ConstituencyWiseOverview({ allWorks, depositWorksCount, 
             purpose = "ARS";
         }
         
-        if (constituency && constituencyOptions.includes(constituency)) {
+        if (constituency && dynamicConstituencyOptions.includes(constituency)) {
           const currentData = constituencyData[constituency];
           const expenditure = Number(work.totalExpenditure) || 0;
           
@@ -169,7 +179,7 @@ export default function ConstituencyWiseOverview({ allWorks, depositWorksCount, 
     });
 
     return { summaryData: { constituencyData, displayPurposes: allDisplayPurposes }, totalCategorizedWorks };
-  }, [allWorks, dates]);
+  }, [allWorks, dates, dynamicConstituencyOptions]);
 
   const handleCellClick = (data: any[], title: string) => {
     const columns = [
@@ -196,8 +206,8 @@ export default function ConstituencyWiseOverview({ allWorks, depositWorksCount, 
   };
   
   const sortedConstituencies = useMemo(() => {
-      return [...constituencyOptions].sort((a,b) => a.localeCompare(b));
-  }, []);
+      return [...dynamicConstituencyOptions].sort((a,b) => a.localeCompare(b));
+  }, [dynamicConstituencyOptions]);
   
   return (
     <Card>
