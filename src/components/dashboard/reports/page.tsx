@@ -1,3 +1,4 @@
+
 // src/app/dashboard/reports/page.tsx
 "use client";
 
@@ -32,7 +33,6 @@ import {
   type FileStatus,
   type SiteWorkStatus,
   type SitePurpose,
-  constituencyOptions,
 } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 import { useFileEntries } from "@/hooks/useFileEntries";
@@ -41,6 +41,7 @@ import { useToast } from "@/hooks/use-toast";
 import ExcelJS from 'exceljs';
 import { usePageHeader } from "@/hooks/usePageHeader";
 import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useDataStore } from "@/hooks/use-data-store";
 
 export const dynamic = 'force-dynamic';
 
@@ -138,6 +139,7 @@ export default function ReportsPage() {
   const router = useRouter(); 
   const { fileEntries, isLoading: entriesLoading, getFileEntry } = useFileEntries();
   const { user, isLoading: authIsLoading } = useAuth();
+  const { allLsgConstituencyMaps } = useDataStore();
   const [filteredReportRows, setFilteredReportRows] = useState<FlattenedReportRow[]>([]);
   const { toast } = useToast();
 
@@ -167,6 +169,15 @@ export default function ReportsPage() {
     setCurrentDate(format(now, 'dd/MM/yyyy'));
     setCurrentTime(format(now, 'hh:mm:ss a'));
   }, []);
+
+  const dynamicConstituencyOptions = useMemo(() => {
+    const allOptions = new Set<string>();
+    allLsgConstituencyMaps.forEach(map => {
+        map.constituencies.forEach(c => allOptions.add(c));
+    });
+    return Array.from(allOptions).sort((a,b) => a.localeCompare(b));
+  }, [allLsgConstituencyMaps]);
+
 
   const applyFilters = useCallback(() => {
     let currentEntries = [...fileEntries];
@@ -358,11 +369,33 @@ export default function ReportsPage() {
     applicationTypeFilter, typeOfRigFilter, constituencyFilter, searchParams
   ]);
 
+  // This effect runs once on mount to set initial filter states from URL
+  useEffect(() => {
+    if (!entriesLoading && !authIsLoading) {
+      const statusFromQuery = searchParams?.get("status");
+      const workCategoryFromQuery = searchParams?.get("workCategory");
+      const serviceTypeFromQuery = searchParams?.get("serviceType");
+
+      setStatusFilter(statusFromQuery && fileStatusOptions.includes(statusFromQuery as any) ? statusFromQuery : "all");
+      setWorkCategoryFilter(workCategoryFromQuery && siteWorkStatusOptions.includes(workCategoryFromQuery as any) ? workCategoryFromQuery : "all");
+      setServiceTypeFilter(serviceTypeFromQuery && (sitePurposeOptions.includes(serviceTypeFromQuery as any) || serviceTypeFromQuery === 'all') ? serviceTypeFromQuery : "all");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, entriesLoading, authIsLoading]);
+
+  // This effect runs whenever filters change to re-generate the report
   useEffect(() => {
     if (!entriesLoading && !authIsLoading) {
       applyFilters();
     }
-  }, [entriesLoading, authIsLoading, applyFilters]);
+  }, [
+    fileEntries, // Re-run when base data changes
+    searchTerm, statusFilter, serviceTypeFilter, workCategoryFilter, 
+    startDate, endDate, dateFilterType,
+    applicationTypeFilter, typeOfRigFilter, constituencyFilter, 
+    entriesLoading, authIsLoading,
+    applyFilters // The memoized function
+  ]);
   
   useEffect(() => {
     setCurrentPage(1);
@@ -559,7 +592,7 @@ export default function ReportsPage() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Constituencies</SelectItem>
-                    {[...constituencyOptions].sort((a,b) => a.localeCompare(b)).map((constituency) => (
+                    {dynamicConstituencyOptions.map((constituency) => (
                       <SelectItem key={constituency} value={constituency}>{constituency}</SelectItem>
                     ))}
                   </SelectContent>
