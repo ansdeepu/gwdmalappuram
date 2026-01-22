@@ -65,18 +65,14 @@ export default function SelectionNoticeForm({ onSubmit, onCancel, isSubmitting, 
 
     const calculateAdditionalPG = useCallback((estimateAmount?: number, tenderAmount?: number): number => {
         if (!estimateAmount || !tenderAmount || tenderAmount >= estimateAmount) return 0;
-        
+    
         const percentageDifference = (estimateAmount - tenderAmount) / estimateAmount;
-        
-        if (percentageDifference > 0.10) { // Threshold is 10%
-            const differenceAmount = estimateAmount - tenderAmount;
-            let additionalPG = 0.25 * differenceAmount; // 25% of the difference
-            const maxPG = 0.10 * estimateAmount; // Cap at 10% of estimate cost
+        const apgThreshold = 0.10;
+    
+        if (percentageDifference > apgThreshold) {
+            const excessPercentage = percentageDifference - apgThreshold;
+            const additionalPG = excessPercentage * estimateAmount;
             
-            if (additionalPG > maxPG) {
-                additionalPG = maxPG;
-            }
-
             return Math.ceil(additionalPG / 100) * 100; // Round up to next 100
         }
         return 0;

@@ -60,14 +60,11 @@ export default function SelectionNoticePrintPage() {
             if (tender.estimateAmount && l1Bidder.quotedAmount) {
                 const percentageDifference = (tender.estimateAmount - l1Bidder.quotedAmount) / tender.estimateAmount;
                 if (percentageDifference > apgThreshold) {
-                    const differenceAmount = tender.estimateAmount - l1Bidder.quotedAmount;
-                    const rawApg = 0.25 * differenceAmount;
-                    const maxApg = 0.10 * tender.estimateAmount;
-                    const finalRawApg = Math.min(rawApg, maxApg);
-                    displayApgPercentage = ((finalRawApg / tender.estimateAmount) * 100).toFixed(2);
+                    const excessPercentage = percentageDifference - apgThreshold;
+                    displayApgPercentage = (excessPercentage * 100).toFixed(2);
                 }
             } else if (tender.estimateAmount && additionalPerformanceGuarantee > 0) {
-                 // Fallback to the potentially inaccurate calculation if raw values aren't available
+                 // Fallback if l1Bidder amount isn't available for some reason
                 displayApgPercentage = ((additionalPerformanceGuarantee / tender.estimateAmount) * 100).toFixed(2);
             }
             
