@@ -28,7 +28,7 @@ export const formatTenderNoForFilename = (tenderNo: string | undefined | null): 
     }
     
     // The user's example indicates a specific transformation.
-    // e.g. ST/11/25-26 -> ST_11_25_26 -> ST2526ST11
+    // e.g. ST/11/25-26 -> ST_11_25_26 -> 2526ST11
     const transformed = tenderNo.replace(/[\/\-]/g, '_');
     const parts = transformed.split('_');
 
@@ -36,7 +36,7 @@ export const formatTenderNoForFilename = (tenderNo: string | undefined | null): 
         const prefix = parts[0];
         const number = parts[1];
         const yearParts = parts.slice(2).join('');
-        return `${prefix}${yearParts}${prefix}${number}`;
+        return `${yearParts}${prefix}${number}`;
     }
 
     return tenderNo.replace(/[\/\-]/g, '');
