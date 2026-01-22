@@ -10,9 +10,6 @@ const nextConfig = {
     // Set to false to ignore linting errors during build.
     ignoreDuringBuilds: false,
   },
-  allowedDevOrigins: [
-    "https://6000-firebase-gwd-kollam1812252-1766645722275.cluster-sumfw3zmzzhzkx4mpvz3ogth4y.cloudworkstations.dev",
-  ],
   images: {
     remotePatterns: [
       {
@@ -55,10 +52,5 @@ const nextConfig = {
   },
 };
 
-// Force cache invalidation by updating this comment. V10
+// Force cache invalidation by updating this comment. V12
 module.exports = nextConfig;
-
-
-
-
-
