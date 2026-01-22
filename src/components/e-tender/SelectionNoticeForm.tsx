@@ -37,20 +37,6 @@ const parseStampPaperLogic = (description: string) => {
     };
 };
 
-const parseAdditionalPerformanceGuaranteeLogic = (description: string) => {
-    const apgRequiredThresholdMatch = description.match(/between\s+([\d.]+)%\s+and\s+([\d.]+)%/);
-    const noApgThresholdMatch = description.match(/up to ([\d.]+)%/);
-
-    let threshold = 0.10; // Default threshold
-    if (noApgThresholdMatch) {
-        threshold = parseFloat(noApgThresholdMatch[1]) / 100;
-    } else if (apgRequiredThresholdMatch) {
-        threshold = parseFloat(apgRequiredThresholdMatch[1]) / 100;
-    }
-    return { threshold };
-};
-
-
 export default function SelectionNoticeForm({ onSubmit, onCancel, isSubmitting, l1Amount }: SelectionNoticeFormProps) {
     const { tender } = useTenderData();
     const { allRateDescriptions } = useDataStore();
@@ -80,16 +66,21 @@ export default function SelectionNoticeForm({ onSubmit, onCancel, isSubmitting, 
     const calculateAdditionalPG = useCallback((estimateAmount?: number, tenderAmount?: number): number => {
         if (!estimateAmount || !tenderAmount || tenderAmount >= estimateAmount) return 0;
         
-        const logic = parseAdditionalPerformanceGuaranteeLogic(additionalPerformanceGuaranteeDescription);
         const percentageDifference = (estimateAmount - tenderAmount) / estimateAmount;
         
-        if (percentageDifference > logic.threshold) {
-            const excessPercentage = percentageDifference - logic.threshold;
-            const additionalPG = excessPercentage * estimateAmount;
-            return Math.ceil(additionalPG / 100) * 100;
+        if (percentageDifference > 0.10) { // Threshold is 10%
+            const differenceAmount = estimateAmount - tenderAmount;
+            let additionalPG = 0.25 * differenceAmount; // 25% of the difference
+            const maxPG = 0.10 * estimateAmount; // Cap at 10% of estimate cost
+            
+            if (additionalPG > maxPG) {
+                additionalPG = maxPG;
+            }
+
+            return Math.ceil(additionalPG / 100) * 100; // Round up to next 100
         }
         return 0;
-    }, [additionalPerformanceGuaranteeDescription]);
+    }, []);
 
 
     const form = useForm<SelectionNoticeDetailsFormData>({
