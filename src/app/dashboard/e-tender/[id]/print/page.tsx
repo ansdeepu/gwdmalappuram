@@ -1,3 +1,4 @@
+
 // src/app/dashboard/e-tender/[id]/print/page.tsx
 "use client";
 
@@ -22,7 +23,7 @@ export default function TenderPrintPage() {
                 <h2 className="text-lg font-bold text-center mb-4 underline">NOTICE INVITING TENDER</h2>
                 
                 <div className="text-sm flex justify-between">
-                    <p>No: {tender.fileNo ? `GKT/${tender.fileNo}` : '__________'}</p>
+                    <p>No: {tender.fileNo ? `GM/${tender.fileNo}` : '__________'}</p>
                     <p>Date: {formatDateSafe(tender.tenderDate) || '__________'}</p>
                 </div>
                 

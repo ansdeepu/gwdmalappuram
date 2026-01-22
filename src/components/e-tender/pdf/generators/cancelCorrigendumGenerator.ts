@@ -1,3 +1,4 @@
+
 // src/components/e-tender/pdf/generators/cancelCorrigendumGenerator.ts
 import { PDFDocument, PDFTextField, StandardFonts, TextAlignment, rgb } from 'pdf-lib';
 import type { E_tender } from '@/hooks/useE_tenders';
@@ -25,7 +26,7 @@ export async function generateCancelCorrigendum(tender: E_tender, corrigendum: C
     const reasonText = `     The tender invited for the above work is hereby cancelled, as ${reason}. Hence, further processing of the tender is not required. Any bids received in response to this tender shall be treated as withdrawn, and no further correspondence in this regard will be entertained. It is also noted that the tender for this work was published mistakenly, and the same stands cancelled accordingly.`;
 
     const fieldMappings: Record<string, any> = {
-        'file_no_header': `GKT/${tender.fileNo || ''}`,
+        'file_no_header': `GM/${tender.fileNo || ''}`,
         'e_tender_no_header': tender.eTenderNo,
         'tender_date_header': `Dated ${formatDateSafe(tender.tenderDate)}`,
         'name_of_work': tender.nameOfWork,

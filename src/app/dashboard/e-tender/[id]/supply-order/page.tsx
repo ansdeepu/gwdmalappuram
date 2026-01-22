@@ -1,3 +1,4 @@
+
 // src/app/dashboard/e-tender/[id]/supply-order/page.tsx
 "use client";
 
@@ -52,7 +53,7 @@ export default function SupplyOrderPrintPage() {
             <div className="space-y-6">
                 <div className="flex justify-between">
                     <div>
-                        <p>File No. GKT/{tender.fileNo || '__________'}</p>
+                        <p>File No. GM/{tender.fileNo || '__________'}</p>
                         <p>Tender No. {tender.eTenderNo || '__________'}</p>
                     </div>
                     <div className="text-right">

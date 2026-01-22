@@ -1,3 +1,4 @@
+
 // src/components/e-tender/pdf/generators/bidOpeningSummaryGenerator.ts
 import { PDFDocument, PDFTextField, StandardFonts, TextAlignment, rgb } from 'pdf-lib';
 import type { E_tender } from '@/hooks/useE_tenders';
@@ -37,7 +38,7 @@ export async function generateBidOpeningSummary(tender: E_tender, allStaffMember
     const fileName = `aBidOpening${formattedTenderNo}.pdf`;
 
     const fieldMappings: Record<string, any> = {
-        'file_no_header': `GKT/${tender.fileNo || ''}`,
+        'file_no_header': `GM/${tender.fileNo || ''}`,
         'e_tender_no_header': tender.eTenderNo,
         'tender_date_header': formatDateSafe(tender.tenderDate),
         'name_of_work': tender.nameOfWork,

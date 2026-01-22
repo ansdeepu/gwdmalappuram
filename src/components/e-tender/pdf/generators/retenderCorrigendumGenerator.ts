@@ -1,3 +1,4 @@
+
 // src/components/e-tender/pdf/generators/retenderCorrigendumGenerator.ts
 import { PDFDocument, PDFTextField, StandardFonts, TextAlignment, rgb } from 'pdf-lib';
 import type { E_tender } from '@/hooks/useE_tenders';
@@ -25,7 +26,7 @@ export async function generateRetenderCorrigendum(tender: E_tender, corrigendum:
     const fullParagraph = `     The time period for submitting e-tenders expired on ${lastDate}, and ${reasonText}. Hence, it has been decided to retender the above work.`;
 
     const fieldMappings: Record<string, any> = {
-        'file_no_header': `GKT/${tender.fileNo || ''}`,
+        'file_no_header': `GM/${tender.fileNo || ''}`,
         'e_tender_no_header': tender.eTenderNo,
         'tender_date_header': `Dated ${formatDateSafe(tender.tenderDate)}`,
         'name_of_work': tender.nameOfWork,

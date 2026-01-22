@@ -90,7 +90,7 @@ export default function WorkOrderPrintPage() {
 
               <div className="flex justify-between">
                   <div>
-                      <p>നമ്പർ: ജി.കെ.റ്റി / {tender.fileNo || '__________'}</p>
+                      <p>നമ്പർ: ജി.എം / {tender.fileNo || '__________'}</p>
                       <p>ടെണ്ടർ നമ്പർ : {tender.eTenderNo || '__________'}</p>
                   </div>
                   <div className="text-right">

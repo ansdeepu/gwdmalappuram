@@ -1,3 +1,4 @@
+
 // src/components/e-tender/pdf/generators/workAgreementGenerator.ts
 import { PDFDocument, StandardFonts, rgb, PageSizes, TextAlignment } from 'pdf-lib';
 import type { E_tender } from '@/hooks/useE_tenders';
@@ -52,7 +53,7 @@ export async function generateWorkAgreement(tender: E_tender, allStaffMembers?: 
 
     // 1. Draw the heading at exactly 17cm from the top
     let currentY = height - cm(17);
-    const headingText = `AGREEMENT NO. GKT/${fileNo}/${eTenderNo} DATED ${agreementDateForHeading}`;
+    const headingText = `AGREEMENT NO. GM/${fileNo}/${eTenderNo} DATED ${agreementDateForHeading}`;
     const headingTextWidth = timesRomanBoldFont.widthOfTextAtSize(headingText, headingFontSize);
     const headingX = (width - headingTextWidth) / 2; // Center alignment
     

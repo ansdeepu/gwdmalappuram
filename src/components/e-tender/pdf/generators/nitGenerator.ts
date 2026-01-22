@@ -1,3 +1,4 @@
+
 // src/components/e-tender/pdf/generators/nitGenerator.ts
 import { PDFDocument, PDFTextField, StandardFonts, rgb, TextAlignment } from 'pdf-lib';
 import type { E_tender } from '@/hooks/useE_tenders';
@@ -25,7 +26,7 @@ export async function generateNIT(tender: E_tender, allStaffMembers?: StaffMembe
     const displayTenderFormFee = tender.tenderFormFee ? `Rs. ${tenderFormFeeValue.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} & Rs. ${gst.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (GST 18%)` : 'N/A';
     
     const fieldMappings: Record<string, any> = {
-        'file_no_header': tender.fileNo ? `GKT/${tender.fileNo}` : '',
+        'file_no_header': tender.fileNo ? `GM/${tender.fileNo}` : '',
         'e_tender_no_header': `${tender.eTenderNo || ''}${isRetender ? ' (Re-Tender)' : ''}`,
         'tender_date_header': formatDateSafe(tender.tenderDate),
         'name_of_work': tender.nameOfWork,
@@ -42,9 +43,9 @@ export async function generateNIT(tender: E_tender, allStaffMembers?: StaffMembe
     const hasRelatedFiles = tender.fileNo2 || tender.fileNo3 || tender.fileNo4;
     if (hasRelatedFiles) {
         fieldMappings['header_1'] = "Related File Numbers:";
-        if (tender.fileNo2) fieldMappings['file_no_2'] = `GKT/${tender.fileNo2}`;
-        if (tender.fileNo3) fieldMappings['file_no_3'] = `GKT/${tender.fileNo3}`;
-        if (tender.fileNo4) fieldMappings['file_no_4'] = `GKT/${tender.fileNo4}`;
+        if (tender.fileNo2) fieldMappings['file_no_2'] = `GM/${tender.fileNo2}`;
+        if (tender.fileNo3) fieldMappings['file_no_3'] = `GM/${tender.fileNo3}`;
+        if (tender.fileNo4) fieldMappings['file_no_4'] = `GM/${tender.fileNo4}`;
     }
 
 
