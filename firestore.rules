@@ -45,7 +45,7 @@ service cloud.firestore {
       
       // Allow a user to create their own profile document.
       // After creation, only editors can write/update profiles.
-      allow create: if request.auth.uid == userId;
+      allow create: if request.auth.uid == userId || isEditor();
       allow update, delete: if isEditor();
     }
 
