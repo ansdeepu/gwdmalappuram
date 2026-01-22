@@ -1,4 +1,3 @@
-
 // src/components/admin/UserManagementTable.tsx
 "use client";
 
@@ -330,7 +329,7 @@ export default function UserManagementTable({
                                 {isDeletingUser && userToDelete?.uid === userRow.uid ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
                                 </Button>
                             </TooltipTrigger>
-                            <TooltipContent><p>Remove User Profile</p></TooltipContent>
+                            <TooltipContent><p>Remove profile from database (Auth user remains)</p></TooltipContent>
                             </Tooltip>
                         )}
                     </div>
@@ -354,10 +353,11 @@ export default function UserManagementTable({
         <AlertDialog open={!!userToDelete} onOpenChange={(open) => !open && setUserToDelete(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Confirm User Removal</AlertDialogTitle>
+              <AlertDialogTitle>Confirm User Profile Removal</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to remove the user profile for <strong>{userToDelete.name || userToDelete.email}</strong>?
-                This action is permanent and cannot be undone.
+                This will remove the user's profile for <strong>{userToDelete.name || userToDelete.email}</strong> from the application database, but it <strong className="text-destructive">will not</strong> delete their authentication record. The user will no longer appear in the app, but their email/password will still exist in Firebase Authentication and must be manually deleted from the Firebase Console.
+                <br/><br/>
+                Are you sure you want to proceed?
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -367,7 +367,7 @@ export default function UserManagementTable({
                 className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
                 disabled={isDeletingUser}
               >
-                {isDeletingUser ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Remove Profile"}
+                {isDeletingUser ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Yes, Remove Profile"}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
