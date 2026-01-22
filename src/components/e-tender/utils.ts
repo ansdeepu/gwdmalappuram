@@ -1,4 +1,3 @@
-
 // src/components/e-tender/utils.ts
 import { format, isValid, parseISO, toDate } from 'date-fns';
 import type { E_tenderStatus } from '@/lib/schemas/eTenderSchema';
@@ -28,15 +27,26 @@ export const formatTenderNoForFilename = (tenderNo: string | undefined | null): 
         return `${yearPart}${tenderNumber}`;
     }
     
-    // Fallback for old or different formats
-    return tenderNo.replace(/[\/\-]/g, '_');
+    // The user's example indicates a specific transformation.
+    // e.g. ST/11/25-26 -> ST_11_25_26 -> ST2526ST11
+    const transformed = tenderNo.replace(/[\/\-]/g, '_');
+    const parts = transformed.split('_');
+
+    if (parts.length >= 3 && /^[A-Z]+$/.test(parts[0])) {
+        const prefix = parts[0];
+        const number = parts[1];
+        const yearParts = parts.slice(2).join('');
+        return `${prefix}${yearParts}${prefix}${number}`;
+    }
+
+    return tenderNo.replace(/[\/\-]/g, '');
 };
 
 
 export const toDateOrNull = (value: any): Date | null => {
   if (value === null || value === undefined || value === '') return null;
   if (value instanceof Date && !isNaN(value.getTime())) return value;
-  if (typeof value === 'object' && value !== null && typeof value.seconds === 'number') {
+  if (typeof value === 'object' && value !== null && typeof (value as any).seconds === 'number') {
     try {
       const ms = value.seconds * 1000 + (value.nanoseconds ? Math.round(value.nanoseconds / 1e6) : 0);
       const d = new Date(ms);
