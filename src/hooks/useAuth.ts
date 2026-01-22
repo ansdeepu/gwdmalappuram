@@ -1,4 +1,3 @@
-
 // src/hooks/useAuth.ts
 "use client";
 
@@ -269,9 +268,9 @@ export function useAuth() {
       return { success: true };
     } catch (error: any) {
       console.error(`[Auth] [CreateUserByAdmin] Failed for ${email}:`, error);
-      let errorMessage = error.message || "An unexpected error occurred during user creation.";
+      let errorMessage = "An unexpected error occurred during user creation.";
       if (error.code === 'auth/email-already-in-use') {
-        errorMessage = `The email address ${email} is already in use.`;
+        errorMessage = `Email already exists in Firebase Authentication. To re-add this user, first delete their account from the Firebase Console, then create it again here.`;
       }
       await deleteApp(tempApp).catch(e => console.error("Failed to delete temp app on error", e));
       return { success: false, error: { message: errorMessage, code: error.code } };

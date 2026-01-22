@@ -355,7 +355,9 @@ export default function UserManagementTable({
             <AlertDialogHeader>
               <AlertDialogTitle>Confirm User Profile Removal</AlertDialogTitle>
               <AlertDialogDescription>
-                This will remove the user's profile for <strong>{userToDelete.name || userToDelete.email}</strong> from the application database, but it <strong className="text-destructive">will not</strong> delete their authentication record. The user will no longer appear in the app, but their email/password will still exist in Firebase Authentication and must be manually deleted from the Firebase Console.
+                This action will remove the user's profile for <strong>{userToDelete.name || userToDelete.email}</strong> from the application database, but it <strong className="text-destructive">will not</strong> delete their authentication record. The user will no longer appear in the app, but their email/password will still exist in Firebase Authentication.
+                <br/><br/>
+                This means you will not be able to create a new user with this email address until the original authentication record is manually deleted from the Firebase Console.
                 <br/><br/>
                 Are you sure you want to proceed?
               </AlertDialogDescription>
